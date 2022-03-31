@@ -1,0 +1,14 @@
+import requests
+import pandas as pd
+
+
+query1='select Date_of_Payment, Physician_First_Name, Physician_Last_Name, Applicable_Manufacturer_or_Applicable_GPO_Making_Payment_Name from payments where Recipient_State="CA" limit 50;'
+quoted_query=requests.utils.quote(query1)
+
+URL = f"http://www.openpayments.us/sqldata?query={quoted_query}"
+
+dict_hit=requests.get(URL)
+dict_text=dict_hit.text
+csv=pd.read_csv(URL,skipinitialspace=True )
+
+result=csvx
